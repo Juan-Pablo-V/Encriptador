@@ -1,0 +1,140 @@
+<html>
+
+<header>
+    <meta charset="UTF-8">
+    <title>Encriptador</title>
+
+    <style>
+        body {
+            background-color: rgb(43, 42, 42);
+            color: rgb(226, 219, 207);
+        }
+
+        div {
+            border-radius: 8px;
+            border: 3px solid rgb(143, 221, 27);
+            width: 330px;
+            height: 180px;
+            text-align: center;
+            margin: 20px;
+            padding: 20px;
+        }
+
+        main {
+            display: flex;
+            height: 500px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            background-color: rgb(143, 221, 27);
+            padding: 6px;
+            margin: 8px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        h2{
+            text-align: center;
+        }
+    </style>
+
+</header>
+
+<body>
+    <h2>Encriptador de textos</h2>
+    <main>
+        
+        <div>
+            <p>
+                -Usar solo letras minúsculas
+                <br>
+                -No deben utilizar letras con acentos ni caracteres especiales
+            </p>
+            <br>
+            <input type="text" name="" id="entrada"> <br>
+            <button id="btn-encriptar">Encriptar</button>
+            <button id="btn-desencriptar">Desencriptar</button>
+        </div>
+
+
+        <div>
+            <p>Resultado</p>
+            <input type="text" name="" id="salida">
+            <button id="btn-copiar">Copiar</button>
+        </div>
+
+
+    </main>
+
+
+    <footer>
+        <p>Desarrollado por Juan Pablo Velazquez</p>
+    </footer>
+
+</body>
+
+
+<script>
+
+    function encriptar() {
+        var input = document.querySelector("#entrada");
+        var salida = document.querySelector("#salida");
+        var texto = input.value;
+        var resultado = "";
+        for (let i = 0; i < texto.length; i++) {
+            if (texto.charAt(i) == "e") {
+                resultado = resultado + "enter";
+            } else if (texto.charAt(i) == "i") {
+                resultado = resultado + "imes";
+            } else if (texto.charAt(i) == "a") {
+                resultado = resultado + "ai";
+            } else if (texto.charAt(i) == "o") {
+                resultado = resultado + "ober";
+            } else if (texto.charAt(i) == "u") {
+                resultado = resultado + "ufat";
+            } else {
+                resultado = resultado + texto.charAt(i);
+            }
+
+        }
+        salida.value = resultado;
+    }
+    function desencriptar() {
+        var input = document.querySelector("#entrada");
+        var salida = document.querySelector("#salida");
+        var texto = input.value;
+        texto = texto.replaceAll("enter", "e");
+        texto = texto.replaceAll("ober", "o");
+        texto = texto.replaceAll("imes", "i");
+        texto = texto.replaceAll("ai", "a");
+        texto = texto.replaceAll("ufat", "u");
+        salida.value = texto;
+    }
+
+
+    function updateClipboard() {
+        var salida = document.querySelector("#salida");
+        navigator.clipboard.writeText(salida.value).then(function () {
+
+        }, function () {
+            /* clipboard write failed */
+        });
+    }
+
+
+
+
+
+    var btnE = document.querySelector("#btn-encriptar");
+    var btnD = document.querySelector("#btn-desencriptar");
+    var btnC = document.querySelector("#btn-copiar");
+
+    btnE.onclick = encriptar;
+    btnD.onclick = desencriptar;
+    btnC.onclick = updateClipboard;
+
+</script>
+
+</html>
